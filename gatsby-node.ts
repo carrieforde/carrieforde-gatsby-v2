@@ -137,20 +137,20 @@ export const createPages: GatsbyNode['createPages'] = async ({
   //   });
   // });
 
-  // pages.nodes.forEach((node) => {
-  //   if (!node.fields?.slug) {
-  //     return;
-  //   }
-  //   createPage({
-  //     path: node.fields.slug.includes('home') ? '/' : node.fields.slug,
-  //     component: `${path.resolve(
-  //       './src/templates/page.tsx',
-  //     )}?__contentFilePath=${node.internal.contentFilePath}`,
-  //     context: {
-  //       slug: node.fields.slug,
-  //     },
-  //   });
-  // });
+  pages.nodes.forEach((node) => {
+    if (!node.fields?.slug) {
+      return;
+    }
+    createPage({
+      path: node.fields.slug.includes('home') ? '/' : node.fields.slug,
+      component: `${path.resolve(
+        './src/templates/page/page.tsx',
+      )}?__contentFilePath=${node.internal.contentFilePath}`,
+      context: {
+        slug: node.fields.slug,
+      },
+    });
+  });
 
   // posts.edges.forEach((edge) => {
   //   if (!edge.node.fields?.slug) {
@@ -177,6 +177,9 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
   // Handle absolute paths when using Typescript.
   actions.setWebpackConfig({
     resolve: {
+      alias: {
+        '@/*': path.resolve(__dirname, 'src/*'), // maps @something to path/to/something
+      },
       modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     },
   });

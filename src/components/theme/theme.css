@@ -115,6 +115,9 @@
 
   --border-radius: 4px;
 
+  --font-family-libre-franklin: 'Libre Franklin';
+  --font-family-ibm-plex-mono: 'IBM Plex Mono';
+
   --font-family-body: var(--font-family-libre-franklin, system-ui);
   --font-family-monospace: var(--font-family-ibm-plex-mono, monospace);
 
