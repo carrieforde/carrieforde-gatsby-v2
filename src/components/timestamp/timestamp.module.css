@@ -1,0 +1,14 @@
+.timestamp {
+  --timestamp-color: var(--color-default-600);
+  --timestamp-gap: calc(var(--base-spacing) / 2);
+
+  display: inline-flex;
+  gap: var(--timestamp-gap);
+}
+
+.default {
+  --timestamp-default-font-size: 14px;
+
+  color: var(--timestamp-color);
+  font-size: var(--timestamp-default-font-size);
+}

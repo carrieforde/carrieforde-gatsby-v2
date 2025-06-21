@@ -1,0 +1,22 @@
+.title {
+  --card-title-color: var(--color-default-dark);
+  --card-title-font-size: 24px;
+
+  --title-color: var(--card-title-color);
+  --title-font-size: var(--card-title-font-size);
+}
+
+.link {
+  text-decoration: none;
+}
+
+.meta {
+  margin-block: var(--base-spacing);
+  display: inline-flex;
+  gap: calc(var(--base-spacing) / 2);
+}
+@media (prefers-color-scheme: dark) {
+  .title {
+    --card-title-color: var(--color-default-light);
+  }
+}

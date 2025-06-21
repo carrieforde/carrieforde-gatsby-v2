@@ -1,0 +1,48 @@
+.drawer {
+  /* --body-width: 100%; */
+  --drawer-bg-color: var(--color-default-contrast);
+  --drawer-width: 400px;
+  --drawer-z-index: var(--z-index-drawer);
+
+  background-color: var(--drawer-bg-color);
+  box-shadow: 0 0 4px 0 rgb(0 0 0 / 15%);
+  max-width: 100%;
+  padding-block: calc(var(--base-spacing) * 6);
+  padding-inline: calc(var(--base-spacing) * 4);
+  position: fixed;
+  width: var(--drawer-width);
+  z-index: var(--drawer-z-index);
+}
+
+.nudge {
+  transition: width 0.3s ease-in;
+  width: initial;
+}
+
+@media screen and (width >= 800px) {
+  .nudgeOpen {
+    width: calc(var(--body-width) - var(--drawer-width));
+  }
+}
+
+.left {
+  bottom: 0;
+  right: 0;
+  top: 0;
+  transform: translateX(var(--drawer-width));
+  transition: transform 0.3s ease-in;
+}
+
+.open {
+  transform: translateX(0);
+}
+
+.drawerNoScroll {
+  overflow-y: hidden;
+}
+
+.button {
+  position: absolute;
+  right: 32px;
+  top: 24px;
+}

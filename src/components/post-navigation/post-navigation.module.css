@@ -1,0 +1,61 @@
+.postNavigation {
+  --post-navigation-gap: calc(var(--base-spacing) * 2);
+  --post-navigation-font-size: 14px;
+  --post-navigation-font-weight: 600;
+  --post-navigation-margin-block-start: calc(var(--base-spacing) * 8);
+
+  display: flex;
+  font-size: var(--post-navigation-font-size);
+  font-weight: var(--post-navigation-font-weight);
+  gap: var(--post-navigation-gap);
+  margin-block-start: var(--post-navigation-margin-block-start);
+}
+
+.link {
+  --post-navigation-link-text-decoration: none;
+  --post-navigation-link-gap: calc(var(--base-spacing) / 2);
+  --post-navigation-link-line-height: 1.25;
+
+  align-items: baseline;
+  display: flex;
+  flex: 0 0 50%;
+  gap: var(--post-navigation-link-gap);
+  line-height: var(--post-navigation-link-line-height);
+  text-decoration: var(--post-navigation-link-text-decoration);
+}
+
+.link:hover {
+  --link-color-hover: var(--link-color);
+
+  margin-inline-start: auto;
+}
+
+.next {
+  text-align: right;
+  justify-content: end;
+  margin-inline-start: auto;
+}
+
+.next:hover .icon {
+  transform: translateX(var(--base-spacing));
+}
+
+.previous {
+  margin-inline-end: auto;
+}
+
+.previous .icon {
+  order: -1;
+  justify-content: start;
+}
+
+.previous:hover .icon {
+  transform: translateX(calc(var(--base-spacing) * -1));
+}
+
+.icon {
+  --icon-fill: var(--link-color, var(--color-primary-main));
+  --icon-height: 12px;
+
+  transition: transform 0.3s ease-in;
+}

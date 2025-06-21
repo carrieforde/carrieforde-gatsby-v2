@@ -1,0 +1,19 @@
+.menu {
+  --menu-gap: var(--base-spacing);
+  --menu-icon-fill: var(--link-color);
+
+  --icon-fill: var(--menu-icon-fill);
+
+  composes: listReset from "@/styles/utilities.module.css";
+  display: inline-flex;
+  gap: var(--menu-gap);
+}
+
+.icon {
+  --menu-gap: calc(var(--base-spacing) * 2);
+  margin-block-start: calc(var(--base-spacing) * 3);
+}
+
+.icon svg {
+  --icon-fill: var(--menu-icon-fill);
+}

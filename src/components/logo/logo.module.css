@@ -1,0 +1,14 @@
+.logo {
+  --logo-c: var(--color-default-900);
+  --logo-bar: var(--color-default-100);
+  --logo-gradient-start: var(--color-primary-700);
+  --logo-gradient-1: var(--color-primary-600);
+  --logo-gradient-2: var(--color-primary-500);
+  --logo-gradient-3: var(--color-primary-400);
+  --logo-gradient-4: var(--color-primary-300);
+  --logo-gradient-end: var(--color-primary-100);
+
+  --logo-width: 50px;
+
+  width: var(--logo-width);
+}
