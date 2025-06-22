@@ -1,5 +1,5 @@
 ---
-title: "Aurora Project: a clean, modern Sass and ES Next-ready project boilerplate"
+title: 'Aurora Project: a clean, modern Sass and ES Next-ready project boilerplate'
 category: Development
 date: 2018-03-05
 ---
@@ -102,7 +102,7 @@ After the initial project setup, I focused on creating my foundational Sass file
 
 There is nearly as much / more documentation for this mixin as there is code! But it sure is helpful to have documentation to which I can refer later.
 
-![A screenshot of Sassdoc documentation for a button mixin within Aurora Core.](button-sassdoc.jpg)
+![A screenshot of Sassdoc documentation for a button mixin within Aurora Core.](./button-sassdoc.jpg)
 
 ## Introducing Webpack
 

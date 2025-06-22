@@ -39,7 +39,7 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
               href={pageContext.previous.fields.slug}
               direction="previous"
             >
-              Previous
+              {pageContext.previous.frontmatter.title ?? 'Previous'}
             </PostNavigation.Link>
           )}
           {pageContext.next?.fields.slug && (
@@ -47,7 +47,7 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
               href={pageContext.next.fields.slug}
               direction="next"
             >
-              Next
+              {pageContext.next.frontmatter.title ?? 'Next'}
             </PostNavigation.Link>
           )}
         </PostNavigation>

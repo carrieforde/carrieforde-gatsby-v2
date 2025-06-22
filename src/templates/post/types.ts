@@ -4,6 +4,9 @@ type PaginationField = {
   fields: {
     slug: string | null;
   };
+  frontmatter: {
+    title: string | null;
+  };
 };
 
 type PostTemplatePageContext = {

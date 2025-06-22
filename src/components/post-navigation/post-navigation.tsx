@@ -30,7 +30,7 @@ const PostNavigationLink: React.FC<PostNavigationLinkProps> = ({
   );
 
   return (
-    <Link {...props} className={linkClasses}>
+    <Link {...props} className={linkClasses} variant="navigation">
       {children}
       <Icon direction={direction} />
     </Link>

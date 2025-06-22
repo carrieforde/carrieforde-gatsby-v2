@@ -28,8 +28,7 @@ h6 {
   color: var(--heading-color);
   font-weight: var(--heading-font-weight);
   line-height: var(--heading-line-height);
-  margin-bottom: var(--heading-margin-bottom);
-  margin-top: 0;
+  margin-block: var(--heading-margin-block);
 }
 
 * + h1,
@@ -38,7 +37,7 @@ h6 {
 * + h4,
 * + h5,
 * + h6 {
-  margin-top: 48px;
+  margin-top: calc(var(--base-spacing) * 6);
 }
 
 /* Paragraphs & inline elements */
@@ -232,6 +231,17 @@ sup {
 img {
   max-width: 100%;
   height: auto;
+}
+
+.gatsby-resp-image-wrapper {
+  margin-block: calc(var(--base-spacing) * 4);
+}
+
+/**
+ * Web components
+ */
+alcatraz-accordion {
+  margin-block: calc(var(--base-spacing) * 4);
 }
 
 @media (prefers-color-scheme: dark) {

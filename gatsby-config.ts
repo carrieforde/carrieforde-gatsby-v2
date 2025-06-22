@@ -1,10 +1,9 @@
 import type { GatsbyConfig } from 'gatsby';
-import path from 'path';
 
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `Carrie Forde`,
-    description: `Carrie Forde is a front end software engineer in San Mateo, California who specializes in building elegant, maintainable, and performant websites.`,
+    description: `Carrie Forde is a frontend software engineer in the SF Bay Area who specializes in building elegant, maintainable, and performant websites.`,
     author: `@carrieforde`,
     mainNavigation: [
       {
@@ -41,12 +40,12 @@ const config: GatsbyConfig = {
     // 'gatsby-plugin-google-gtag',
     'gatsby-plugin-image',
     'gatsby-plugin-sitemap',
-    // {
-    //   resolve: "gatsby-plugin-manifest",
-    //   options: {
-    //     icon: "src/images/icon.png",
-    //   },
-    // },
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        icon: 'src/images/icon.png',
+      },
+    },
     {
       resolve: 'gatsby-plugin-mdx',
       options: {

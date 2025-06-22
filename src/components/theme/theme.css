@@ -145,7 +145,15 @@
   --z-index-drawer: 10;
 
   /** Component settings */
+  --heading-color: var(--color-default-900);
+  --heading-font-weight: 600;
+  --heading-line-height: 1.1;
+  --heading-margin-block: 0 var(--base-spacing);
+
   --link-color: var(--color-primary-main);
+
+  --alcatraz-accordion-border-radius: 4px;
+  --alcatraz-accordion-border: 1px solid var(--color-default-100);
 }
 
 @media screen and (width >= 600px) {
@@ -160,5 +168,6 @@
     --text-color: var(--light-text-color);
 
     --link-color: var(--color-primary-200);
+    --alcatraz-accordion-border: 1px solid var(--color-default-700);
   }
 }

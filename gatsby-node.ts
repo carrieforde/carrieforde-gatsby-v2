@@ -85,10 +85,16 @@ export const createPages: GatsbyNode['createPages'] = async ({
             fields {
               slug
             }
+            frontmatter {
+              title
+            }
           }
           previous {
             fields {
               slug
+            }
+            frontmatter {
+              title
             }
           }
           node {
@@ -185,14 +191,36 @@ export const createPages: GatsbyNode['createPages'] = async ({
 // Hook into webpack for custom handling of things, like absolute paths in Typescript.
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
   actions,
+  loaders,
+  stage,
 }) => {
-  // Handle absolute paths when using Typescript.
-  actions.setWebpackConfig({
+  const configForTsAbsolutePaths = {
     resolve: {
       alias: {
         '@/*': path.resolve(__dirname, 'src/*'), // maps @something to path/to/something
       },
       modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     },
-  });
+  };
+  const configForWebComponents = {
+    module: {
+      rules: [
+        {
+          test: /@alcatraz-components\/accordion/,
+          use: loaders.null(),
+        },
+      ],
+    },
+  };
+
+  if (stage === 'build-html') {
+    actions.setWebpackConfig({
+      ...configForTsAbsolutePaths,
+      ...configForWebComponents,
+    });
+  } else {
+    actions.setWebpackConfig({
+      ...configForTsAbsolutePaths,
+    });
+  }
 };

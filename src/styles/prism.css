@@ -1,5 +1,5 @@
 :root {
-  --comment-color: var(--color-default-300);
+  --comment-color: var(--color-default-400);
   --punctuation-color: var(--color-default-500);
   --property-color: var(--color-primary-700);
   --selector-color: var(--color-secondary-600);

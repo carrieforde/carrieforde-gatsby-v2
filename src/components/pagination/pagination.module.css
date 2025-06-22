@@ -1,4 +1,11 @@
 .pagination {
+  --pagination-font-size: 14px;
+  --pagination-font-weight: 600;
+  --pagination-link-gap: calc(var(--base-spacing) / 2);
+  --pagination-link-line-height: 1.25;
+  --pagination-margin-block-start: calc(var(--base-spacing) * 8);
+  --pagination-text-transform: none;
+
   align-items: baseline;
   display: flex;
   justify-content: space-between;
@@ -9,20 +16,17 @@
 
 .numbers {
   display: inline-flex;
-  gap: 4px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-inline: auto;
 }
 
 .link {
-  composes: body2 from 'components/text/text.module.css';
-  display: flex;
-  gap: 4px;
-  padding-left: 8px;
-  padding-right: 8px;
-  text-decoration: none;
+  --link-navigation-font-size: var(--pagination-font-size);
+  --link-navigation-line-height: var(--pagination-link-line-height);
+  --link-navigation-text-transform: var(--pagination-text-transform);
 
-  --body2-color: var(--color-primary-main);
+  display: flex;
+  gap: calc(var(--base-spacing) / 2);
+  padding-inline: var(--base-spacing);
 }
 
 .linkActive {

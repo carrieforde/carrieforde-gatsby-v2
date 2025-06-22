@@ -6,7 +6,7 @@ import { Text } from '@/components/text/text';
 import { Box } from '@/components/box/box';
 
 const Next: React.FC<PaginationLinkProps> = ({ text = 'Next', to }) => (
-  <Link className={s.nextLink} href={to}>
+  <Link className={s.nextLink} href={to} variant="navigation">
     <Text as="span">{text}</Text>
     <Text as="span" className={s.arrow}>
       &rarr;
@@ -15,7 +15,7 @@ const Next: React.FC<PaginationLinkProps> = ({ text = 'Next', to }) => (
 );
 
 const Previous: React.FC<PaginationLinkProps> = ({ text = 'Previous', to }) => (
-  <Link className={s.previousLink} href={to}>
+  <Link className={s.previousLink} href={to} variant="navigation">
     <Text as="span" className={s.arrow}>
       &larr;
     </Text>
@@ -28,7 +28,12 @@ type NumberLinkProps = Omit<PaginationLinkProps, 'text'> & {
 };
 
 const Number: React.FC<NumberLinkProps> = ({ to, text }) => (
-  <Link activeClassName={s.linkActive} className={s.link} href={to}>
+  <Link
+    activeClassName={s.linkActive}
+    className={s.link}
+    href={to}
+    variant="navigation"
+  >
     {text}
   </Link>
 );

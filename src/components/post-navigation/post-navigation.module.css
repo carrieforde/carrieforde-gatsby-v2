@@ -2,7 +2,10 @@
   --post-navigation-gap: calc(var(--base-spacing) * 2);
   --post-navigation-font-size: 14px;
   --post-navigation-font-weight: 600;
+  --post-navigation-link-gap: calc(var(--base-spacing) / 2);
+  --post-navigation-link-line-height: 1.25;
   --post-navigation-margin-block-start: calc(var(--base-spacing) * 8);
+  --post-navigation-text-transform: none;
 
   display: flex;
   font-size: var(--post-navigation-font-size);
@@ -12,16 +15,14 @@
 }
 
 .link {
-  --post-navigation-link-text-decoration: none;
-  --post-navigation-link-gap: calc(var(--base-spacing) / 2);
-  --post-navigation-link-line-height: 1.25;
+  --link-navigation-font-size: var(--post-navigation-font-size);
+  --link-navigation-line-height: var(--post-navigation-link-line-height);
+  --link-navigation-text-transform: var(--post-navigation-text-transform);
 
   align-items: baseline;
   display: flex;
   flex: 0 0 50%;
   gap: var(--post-navigation-link-gap);
-  line-height: var(--post-navigation-link-line-height);
-  text-decoration: var(--post-navigation-link-text-decoration);
 }
 
 .link:hover {
