@@ -6,9 +6,9 @@
   gap: var(--timestamp-gap);
 }
 
-.default {
-  --timestamp-default-font-size: 14px;
+.body1 {
+  --timestamp-body1-font-size: 14px;
 
   color: var(--timestamp-color);
-  font-size: var(--timestamp-default-font-size);
+  font-size: var(--timestamp-body1-font-size);
 }

@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import * as React from 'react';
+import { Link as GatsbyLink } from 'gatsby';
 
 import { TagName } from '@/components/link/types';
 import { forwardRef } from '@/components/utilities/react';
@@ -10,6 +11,7 @@ export const Link = forwardRef(function Link(
   { as = TagName, children, className, color, isActive, variant, ...props },
   ref,
 ) {
+  const { href } = props;
   const linkClasses = clsx('link', s.link, className, {
     [s.navigation]: variant === 'navigation',
     [s.skipLink]: variant === 'skipLink',
@@ -20,16 +22,31 @@ export const Link = forwardRef(function Link(
     [s.navigationActive]: variant === 'navigation' && isActive,
   });
 
-  return React.createElement(
-    as,
-    {
-      ...props,
-      ...((props.href?.startsWith('http') || props.target === '_blank') && {
-        rel: 'noopener noreferrer',
-      }),
-      className: linkClasses,
-      ref,
-    },
-    children,
+  const isExternalLink = href?.includes('http') || href?.includes('mailto');
+
+  if (isExternalLink || as) {
+    return React.createElement(
+      as,
+      {
+        ...props,
+        ...((props.href?.startsWith('http') || props.target === '_blank') && {
+          rel: 'noopener noreferrer',
+        }),
+        className: linkClasses,
+        ref,
+      },
+      children,
+    );
+  }
+
+  return (
+    <GatsbyLink
+      activeClassName={s.navigationActive}
+      className={linkClasses}
+      to={href}
+      ref={ref}
+    >
+      {children}
+    </GatsbyLink>
   );
 });

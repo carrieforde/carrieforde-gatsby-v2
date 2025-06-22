@@ -1,13 +1,17 @@
-import { Props } from "@/components/utilities/types";
+import { Props } from '@/components/utilities/types';
+import { GatsbyLinkProps } from 'gatsby';
 
-export const TagName = "a" satisfies React.ElementType;
+export const TagName = 'a' satisfies React.ElementType;
 type TagName = typeof TagName;
 
-type LinkVariant = "content" | "navigation" | "skipLink" | "overline";
+type LinkVariant = 'content' | 'navigation' | 'skipLink' | 'overline';
 
-type LinkColor = "primary" | "inherit";
+type LinkColor = 'primary' | 'inherit';
 
-type LinkOptions<T extends React.ElementType = TagName> = {
+type LinkOptions<
+  T extends React.ElementType = TagName,
+  TState extends object = object,
+> = GatsbyLinkProps<TState> & {
   as?: T;
   variant?: LinkVariant;
   color?: LinkColor;

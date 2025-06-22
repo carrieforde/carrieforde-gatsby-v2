@@ -1,7 +1,7 @@
-import { TextProps } from "@/components/text/types";
-import { Props } from "@/components/utilities/types";
+import { TextProps } from '@/components/text/types';
+import { Props } from '@/components/utilities/types';
 
-export const TagName = "article" satisfies React.ElementType;
+export const TagName = 'article' satisfies React.ElementType;
 type TagName = typeof TagName;
 
 type CardOptions<T extends React.ElementType = TagName> = {
@@ -16,13 +16,13 @@ export type CardProps<T extends React.ElementType = TagName> = Props<
 export type CardHeaderProps = React.PropsWithChildren;
 
 export type CardTitleProps = React.PropsWithChildren<
-  Pick<TextProps, "as" | "className"> & {
+  Pick<TextProps, 'as' | 'className'> & {
     href?: string;
   }
 >;
 
 export type CardMetaProps = {
-  date: string;
+  date: string | null;
   timeToRead: number;
 };
 

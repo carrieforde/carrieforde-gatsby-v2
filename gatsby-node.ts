@@ -106,36 +106,36 @@ export const createPages: GatsbyNode['createPages'] = async ({
   if (result.errors) {
     throw result.errors;
   }
-  const { categories, pages, posts } = result.data as any;
+  const { categories, pages, posts } = result.data as Queries.ContentQuery;
   const numberOfPagesBlog = Math.ceil(posts.totalCount / POSTS_PER_PAGE);
 
   // Paginated blog pages.
-  // Array.from({ length: numberOfPagesBlog }).forEach((_, idx) => {
-  //   createPage({
-  //     path: idx === 0 ? 'blog' : `blog/${idx + 1}`,
-  //     component: `${path.resolve('./src/templates/blog.tsx')}`,
-  //     context: {
-  //       limit: POSTS_PER_PAGE,
-  //       skip: idx * POSTS_PER_PAGE,
-  //       pageCount: numberOfPagesBlog,
-  //       currentPage: idx + 1,
-  //     },
-  //   });
-  // });
+  Array.from({ length: numberOfPagesBlog }).forEach((_, idx) => {
+    createPage({
+      path: idx === 0 ? 'blog' : `blog/${idx + 1}`,
+      component: `${path.resolve('./src/templates/blog/blog.tsx')}`,
+      context: {
+        limit: POSTS_PER_PAGE,
+        skip: idx * POSTS_PER_PAGE,
+        pageCount: numberOfPagesBlog,
+        currentPage: idx + 1,
+      },
+    });
+  });
 
-  // categories.group.forEach((group) => {
-  //   if (!group.fieldValue) {
-  //     return;
-  //   }
-  //   createPage({
-  //     path: `category/${slugify(group.fieldValue)}`,
-  //     component: `${path.resolve('./src/templates/category.tsx')}`,
-  //     context: {
-  //       // This is used to make the actual GQL query
-  //       category: group.fieldValue,
-  //     },
-  //   });
-  // });
+  categories.group.forEach((group) => {
+    if (!group.fieldValue) {
+      return;
+    }
+    createPage({
+      path: `category/${slugify(group.fieldValue)}`,
+      component: `${path.resolve('./src/templates/category/category.tsx')}`,
+      context: {
+        // This is used to make the actual GQL query
+        category: group.fieldValue,
+      },
+    });
+  });
 
   pages.nodes.forEach((node) => {
     if (!node.fields?.slug) {
@@ -152,22 +152,22 @@ export const createPages: GatsbyNode['createPages'] = async ({
     });
   });
 
-  // posts.edges.forEach((edge) => {
-  //   if (!edge.node.fields?.slug) {
-  //     return;
-  //   }
-  //   createPage({
-  //     path: edge.node.fields.slug,
-  //     component: `${path.resolve(
-  //       './src/templates/post.tsx',
-  //     )}?__contentFilePath=${edge.node.internal.contentFilePath}`,
-  //     context: {
-  //       next: edge.next,
-  //       previous: edge.previous,
-  //       slug: edge.node.fields.slug,
-  //     },
-  //   });
-  // });
+  posts.edges.forEach((edge) => {
+    if (!edge.node.fields?.slug) {
+      return;
+    }
+    createPage({
+      path: edge.node.fields.slug,
+      component: `${path.resolve(
+        './src/templates/post/post.tsx',
+      )}?__contentFilePath=${edge.node.internal.contentFilePath}`,
+      context: {
+        next: edge.next,
+        previous: edge.previous,
+        slug: edge.node.fields.slug,
+      },
+    });
+  });
 };
 
 // Hook into webpack for custom handling of things, like absolute paths in Typescript.

@@ -10,14 +10,14 @@ export const Timestamp: React.FC<TimestampProps> = ({
   date,
   format = 'long',
   updatedAt,
-  variant = 'default',
+  variant = 'body1',
 }) => {
   const formattedDate = getFormattedDate(date, format);
   const formattedUpdatedAt = updatedAt
     ? getFormattedDate(updatedAt, format)
     : null;
   const timestampClasses = clsx(s.timestamp, {
-    [s.default]: variant === 'default',
+    [s.body1]: variant === 'body1',
   });
 
   return (

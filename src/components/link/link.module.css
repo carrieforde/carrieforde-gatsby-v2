@@ -25,7 +25,7 @@
 }
 
 .skipLink {
-  composes: visuallyHiddenFocusable from "@/styles/utilities.module.css";
+  composes: visuallyHiddenFocusable from '@/styles/utilities.module.css';
 }
 
 .content {
@@ -46,7 +46,9 @@
 }
 
 .overline {
-  composes: overline from "@/components/text/text.module.css";
+  --overline-color: var(--link-color);
+
+  composes: overline from '@/components/text/text.module.css';
   display: inline-block;
   text-decoration: none;
 }
