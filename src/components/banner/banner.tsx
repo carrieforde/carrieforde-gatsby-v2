@@ -6,6 +6,7 @@ import * as React from 'react';
 import * as s from '@/components/banner/banner.module.css';
 import { BannerIconProps, BannerProps } from '@/components/banner/types';
 import { useTheme } from '@/components/theme/use-theme';
+import { MergeField } from '@/components/merge-field/merge-field';
 
 const Icon: React.FC<BannerIconProps> = ({
   children,
@@ -28,7 +29,12 @@ const Icon: React.FC<BannerIconProps> = ({
   );
 };
 
-export function Banner({ children, className, icon, variant }: BannerProps) {
+export const Banner: React.FC<BannerProps> = ({
+  children,
+  className,
+  icon,
+  variant,
+}) => {
   const bannerClasses = clsx(
     s.banner,
     variant && [s[variant]],
@@ -42,7 +48,7 @@ export function Banner({ children, className, icon, variant }: BannerProps) {
       <Icon variant={variant} className={s.icon}>
         {icon}
       </Icon>
-      {children}
+      {typeof children === 'string' ? <MergeField text={children} /> : children}
     </section>
   );
-}
+};

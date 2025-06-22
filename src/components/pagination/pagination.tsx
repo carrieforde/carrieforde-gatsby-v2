@@ -57,7 +57,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   const nextPath = `${basePath}/${currentPage + 1}`;
 
   return (
-    <Box className={s.pagination}>
+    <Box as="nav" className={s.pagination}>
       {showPrevious && <Previous text="Newer Posts" to={previousPath} />}
 
       <Box className={s.numbers}>

@@ -2,12 +2,12 @@ import clsx from 'clsx';
 import * as React from 'react';
 import { Link as GatsbyLink } from 'gatsby';
 
-import { TagName } from '@/components/link/types';
+import { LinkProps, TagName } from '@/components/link/types';
 import { forwardRef } from '@/components/utilities/react';
 
 import * as s from './link.module.css';
 
-export const Link = forwardRef(function Link(
+export const Link: React.FC<LinkProps> = forwardRef(function Link(
   { as = TagName, children, className, color, isActive, variant, ...props },
   ref,
 ) {

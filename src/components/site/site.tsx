@@ -19,6 +19,18 @@ import { IconEnvelope } from '@/components/icons/icon-envelope';
 import { IconLinkedin } from '@/components/icons/icon-linkedin';
 import { IconGithub } from '@/components/icons/icon-github';
 import { Logo } from '@/components/logo/logo';
+import { MDXProvider } from '@mdx-js/react';
+import { Banner } from '@/components/banner/banner';
+import { BannerProps } from '@/components/banner/types';
+import { parseQueryString } from '@/utils/utils';
+import { MergeFieldProvider } from '@/components/merge-field/merge-field-provider';
+
+const MDX_COMPONENTS = {
+  Banner: (props: BannerProps & { text?: string }) => (
+    <Banner {...props}>{props.text ?? props.children}</Banner>
+  ),
+  Link,
+};
 
 /**
  * @todo Move skip link here.
@@ -26,43 +38,57 @@ import { Logo } from '@/components/logo/logo';
  * @todo Add footer
  */
 
-export const Site: React.FC<SiteProps> & SiteComposition = ({ children }) => (
-  <Box className={s.site}>
-    <Site.Header>
-      <Site.Branding siteName="Carrie Forde">
-        <Logo />
-      </Site.Branding>
-      <Site.Navigation>
-        <Menu.Item href="/about">About</Menu.Item>
-        <Menu.Item href="/experience">Experience</Menu.Item>
-        <Menu.Item href="/blog">Blog</Menu.Item>
-      </Site.Navigation>
-    </Site.Header>
-    <Site.Main>{children}</Site.Main>
-    <Site.Footer key="footer">
-      <Text variant="finePrint">
-        <Link href="/privacy">Privacy</Link> &bull; Copyright © 2013 &ndash;{' '}
-        {new Date().getFullYear()} Carrie Forde.
-      </Text>
-      <Menu>
-        <Menu.Item key="email" href="mailto:carrie@carrieforde.com">
-          <IconEnvelope />
-          <VisuallyHidden>Email</VisuallyHidden>
-        </Menu.Item>
+export const Site: React.FC<SiteProps> & SiteComposition = ({
+  children,
+  location,
+}) => {
+  const mergeFieldData = parseQueryString(location?.search);
 
-        <Menu.Item key="linkedIn" href="https://linkedin.com/in/carrieforde">
-          <IconLinkedin />
-          <VisuallyHidden>LinkedIn</VisuallyHidden>
-        </Menu.Item>
+  return (
+    <Box className={s.site}>
+      <MergeFieldProvider data={mergeFieldData}>
+        <MDXProvider components={MDX_COMPONENTS}>
+          <Site.Header>
+            <Site.Branding siteName="Carrie Forde">
+              <Logo />
+            </Site.Branding>
+            <Site.Navigation>
+              <Menu.Item href="/about">About</Menu.Item>
+              <Menu.Item href="/experience">Experience</Menu.Item>
+              <Menu.Item href="/blog">Blog</Menu.Item>
+            </Site.Navigation>
+          </Site.Header>
+          <Site.Main>{children}</Site.Main>
+          <Site.Footer key="footer">
+            <Text variant="finePrint">
+              <Link href="/privacy">Privacy</Link> &bull; Copyright © 2013
+              &ndash; {new Date().getFullYear()} Carrie Forde.
+            </Text>
+            <Menu>
+              <Menu.Item key="email" href="mailto:carrie@carrieforde.com">
+                <IconEnvelope />
+                <VisuallyHidden>Email</VisuallyHidden>
+              </Menu.Item>
 
-        <Menu.Item key="github" href="https://github.com/carrieforde">
-          <IconGithub />
-          <VisuallyHidden>GitHub</VisuallyHidden>
-        </Menu.Item>
-      </Menu>
-    </Site.Footer>
-  </Box>
-);
+              <Menu.Item
+                key="linkedIn"
+                href="https://linkedin.com/in/carrieforde"
+              >
+                <IconLinkedin />
+                <VisuallyHidden>LinkedIn</VisuallyHidden>
+              </Menu.Item>
+
+              <Menu.Item key="github" href="https://github.com/carrieforde">
+                <IconGithub />
+                <VisuallyHidden>GitHub</VisuallyHidden>
+              </Menu.Item>
+            </Menu>
+          </Site.Footer>
+        </MDXProvider>
+      </MergeFieldProvider>
+    </Box>
+  );
+};
 
 const Header: React.FC<SiteHeaderProps> = ({ children }) => (
   <Box as="header" className={s.header}>

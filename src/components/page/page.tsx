@@ -5,10 +5,12 @@ import { Box } from '@/components/box/box';
 import {
   PageComposition,
   PageDescriptionProps,
+  PageMetaProps,
   PageProps,
   PageTitleProps,
 } from '@/components/page/types';
 import { Text } from '@/components/text/text';
+import { Timestamp } from '@/components/timestamp/timestamp';
 
 const PageComponent: React.FC<PageProps> = ({ children }) => {
   return <Box as="main">{children}</Box>;
@@ -46,7 +48,16 @@ const Description: React.FC<PageDescriptionProps> = ({ description }) => {
   );
 };
 
+const Meta: React.FC<PageMetaProps> = ({ date, updatedDate }) => {
+  if (!date) {
+    return null;
+  }
+
+  return <Timestamp date={date} updatedAt={updatedDate} />;
+};
+
 export const Page: PageComposition = Object.assign(PageComponent, {
   Title,
   Description,
+  Meta,
 });

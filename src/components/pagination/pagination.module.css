@@ -20,6 +20,7 @@
   gap: 4px;
   padding-left: 8px;
   padding-right: 8px;
+  text-decoration: none;
 
   --body2-color: var(--color-primary-main);
 }

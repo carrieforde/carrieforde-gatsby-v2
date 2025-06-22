@@ -11,7 +11,7 @@ type LinkColor = 'primary' | 'inherit';
 type LinkOptions<
   T extends React.ElementType = TagName,
   TState extends object = object,
-> = GatsbyLinkProps<TState> & {
+> = Omit<GatsbyLinkProps<TState>, 'to'> & {
   as?: T;
   variant?: LinkVariant;
   color?: LinkColor;

@@ -13,6 +13,7 @@ import { Card } from '@/components/card/card';
 import { Link } from '@/components/link/link';
 import { Pagination } from '@/components/pagination/pagination';
 import * as s from './category.module.css';
+import { getCategoryLink } from '@/utils/utils';
 
 const CategoryTemplate: React.FC<CategoryTemplateProps> = ({
   data,
@@ -30,6 +31,7 @@ const CategoryTemplate: React.FC<CategoryTemplateProps> = ({
 
           const { slug, timeToRead } = node.fields;
           const { category, title, description, date } = node.frontmatter;
+          const categorySlug = getCategoryLink(category);
           const excerpt = description
             ? `${parse(
                 `${description?.join('').substring(0, 140).trim()}&hellip;`,
@@ -41,7 +43,7 @@ const CategoryTemplate: React.FC<CategoryTemplateProps> = ({
             <List.Item key={node.id} className={s.entry}>
               <Card>
                 <Card.Header>
-                  <Link color="primary" href="/" variant="overline">
+                  <Link color="primary" href={categorySlug} variant="overline">
                     {category}
                   </Link>
 

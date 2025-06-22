@@ -15,6 +15,7 @@ import { List } from '@/components/list/list';
 import { Link } from '@/components/link/link';
 import * as s from './blog.module.css';
 import { Pagination } from '@/components/pagination/pagination';
+import { getCategoryLink } from '@/utils/utils';
 
 const BlogTemplate: React.FC<BlogTemplateProps> = ({ data, pageContext }) => (
   <Site>
@@ -34,6 +35,8 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({ data, pageContext }) => (
 
           const { slug, timeToRead } = node.fields;
           const { category, title, description, date } = node.frontmatter;
+          const categorySlug = getCategoryLink(category);
+
           const excerpt = description
             ? `${parse(
                 `${description?.join('').substring(0, 140).trim()}&hellip;`,
@@ -45,11 +48,7 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({ data, pageContext }) => (
             <List.Item key={node.id} className={s.entry}>
               <Card>
                 <Card.Header>
-                  <Link
-                    color="primary"
-                    href={`/category/${category?.toLowerCase()}`}
-                    variant="overline"
-                  >
+                  <Link color="primary" href={categorySlug} variant="overline">
                     {category}
                   </Link>
 

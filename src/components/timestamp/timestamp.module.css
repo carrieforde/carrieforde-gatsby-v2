@@ -9,6 +9,9 @@
 .body1 {
   --timestamp-body1-font-size: 14px;
 
-  color: var(--timestamp-color);
-  font-size: var(--timestamp-body1-font-size);
+  --body1-color: var(--timestamp-color);
+  --body1-font-size: var(--timestamp-body1-font-size);
+  --body1-font-weight: 300;
+  --body1-margin-bottom: calc(var(--base-spacing) * 4);
+  --body1-margin-top: calc(var(--base-spacing) * 4);
 }

@@ -1,6 +1,9 @@
-import * as React from "react";
+import { WindowLocation } from '@reach/router';
+import * as React from 'react';
 
-export type SiteProps = React.PropsWithChildren;
+export type SiteProps = React.PropsWithChildren<{
+  location?: WindowLocation<WindowLocation['state']>;
+}>;
 
 export type SiteHeaderProps = React.PropsWithChildren;
 
