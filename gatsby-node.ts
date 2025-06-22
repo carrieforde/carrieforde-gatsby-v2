@@ -62,6 +62,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
               contentFilePath
             }
           }
+          totalCount
         }
       }
       pages: allMdx(
@@ -103,6 +104,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
       }
     }
   `);
+
   if (result.errors) {
     throw result.errors;
   }
@@ -123,17 +125,27 @@ export const createPages: GatsbyNode['createPages'] = async ({
     });
   });
 
+  // Paginated category pages.
   categories.group.forEach((group) => {
-    if (!group.fieldValue) {
-      return;
-    }
-    createPage({
-      path: `category/${slugify(group.fieldValue)}`,
-      component: `${path.resolve('./src/templates/category/category.tsx')}`,
-      context: {
-        // This is used to make the actual GQL query
-        category: group.fieldValue,
-      },
+    const numberOfPagesCategory = Math.ceil(group.totalCount / POSTS_PER_PAGE);
+
+    Array.from({ length: numberOfPagesCategory }).forEach((_, idx) => {
+      if (!group.fieldValue) {
+        return;
+      }
+
+      createPage({
+        path: `category/${slugify(group.fieldValue)}`,
+        component: `${path.resolve('./src/templates/category/category.tsx')}`,
+        context: {
+          // This is used to make the actual GQL query
+          category: group.fieldValue,
+          limit: POSTS_PER_PAGE,
+          skip: idx * POSTS_PER_PAGE,
+          pageCount: numberOfPagesCategory,
+          currentPage: idx + 1,
+        },
+      });
     });
   });
 

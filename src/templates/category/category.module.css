@@ -1,0 +1,7 @@
+.entries {
+  margin-top: calc(var(--base-spacing) * 6);
+}
+
+.entry + .entry {
+  margin-top: calc(var(--base-spacing) * 4);
+}

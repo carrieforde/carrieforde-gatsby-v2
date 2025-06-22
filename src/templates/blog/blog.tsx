@@ -16,11 +16,7 @@ import { Link } from '@/components/link/link';
 import * as s from './blog.module.css';
 import { Pagination } from '@/components/pagination/pagination';
 
-const BlogTemplate: React.FC<BlogTemplateProps> = ({
-  children,
-  data,
-  pageContext,
-}) => (
+const BlogTemplate: React.FC<BlogTemplateProps> = ({ data, pageContext }) => (
   <Site>
     <Page>
       <Page.Title>Blog</Page.Title>
@@ -29,47 +25,51 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({
           'Occasional posts on JavaScript, WordPress, and front end development.',
         ]}
       />
+
+      <List as="ul" variant="reset">
+        {data.blogData.nodes.map((node) => {
+          if (!node.fields?.slug || !node.frontmatter) {
+            return null;
+          }
+
+          const { slug, timeToRead } = node.fields;
+          const { category, title, description, date } = node.frontmatter;
+          const excerpt = description
+            ? `${parse(
+                `${description?.join('').substring(0, 140).trim()}&hellip;`,
+              )}`
+            : node.excerpt;
+          const timeToReadMinutes = Math.ceil(timeToRead?.minutes ?? 0);
+
+          return (
+            <List.Item key={node.id} className={s.entry}>
+              <Card>
+                <Card.Header>
+                  <Link
+                    color="primary"
+                    href={`/category/${category?.toLowerCase()}`}
+                    variant="overline"
+                  >
+                    {category}
+                  </Link>
+
+                  {title && <Card.Title href={slug}>{parse(title)}</Card.Title>}
+                  <Card.Meta date={date} timeToRead={timeToReadMinutes} />
+                </Card.Header>
+
+                {excerpt}
+              </Card>
+            </List.Item>
+          );
+        })}
+      </List>
+
+      <Pagination
+        basePath="/blog"
+        currentPage={pageContext.currentPage}
+        totalPages={pageContext.pageCount}
+      />
     </Page>
-
-    <List as="ul" variant="reset">
-      {data.blogData.nodes.map((node) => {
-        if (!node.fields?.slug || !node.frontmatter) {
-          return null;
-        }
-
-        const { slug, timeToRead } = node.fields;
-        const { category, title, description, date } = node.frontmatter;
-        const excerpt = description
-          ? `${parse(
-              `${description?.join('').substring(0, 140).trim()}&hellip;`,
-            )}`
-          : node.excerpt;
-        const timeToReadMinutes = Math.ceil(timeToRead?.minutes ?? 0);
-
-        return (
-          <List.Item key={node.id} className={s.entry}>
-            <Card>
-              <Card.Header>
-                <Link color="primary" href="/" variant="overline">
-                  {category}
-                </Link>
-
-                {title && <Card.Title href={slug}>{parse(title)}</Card.Title>}
-                <Card.Meta date={date} timeToRead={timeToReadMinutes} />
-              </Card.Header>
-
-              {excerpt}
-            </Card>
-          </List.Item>
-        );
-      })}
-    </List>
-
-    <Pagination
-      basePath="/blog"
-      currentPage={pageContext.currentPage}
-      totalPages={pageContext.pageCount}
-    />
   </Site>
 );
 
