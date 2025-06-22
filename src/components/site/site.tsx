@@ -24,11 +24,13 @@ import { Banner } from '@/components/banner/banner';
 import { BannerProps } from '@/components/banner/types';
 import { parseQueryString } from '@/utils/utils';
 import { MergeFieldProvider } from '@/components/merge-field/merge-field-provider';
+import { Image } from '@/components/image/image';
 
 const MDX_COMPONENTS = {
   Banner: (props: BannerProps & { text?: string }) => (
     <Banner {...props}>{props.text ?? props.children}</Banner>
   ),
+  Image,
   Link,
 };
 
@@ -53,8 +55,7 @@ export const Site: React.FC<SiteProps> & SiteComposition = ({
               <Logo />
             </Site.Branding>
             <Site.Navigation>
-              <Menu.Item href="/about">About</Menu.Item>
-              <Menu.Item href="/experience">Experience</Menu.Item>
+              <Menu.Item href="/">Home</Menu.Item>
               <Menu.Item href="/blog">Blog</Menu.Item>
             </Site.Navigation>
           </Site.Header>

@@ -1,0 +1,8 @@
+.right {
+  float: right;
+}
+
+.circle {
+  clip-path: circle();
+  shape-outside: circle();
+}

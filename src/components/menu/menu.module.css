@@ -1,10 +1,10 @@
 .menu {
-  --menu-gap: var(--base-spacing);
+  --menu-gap: calc(var(--base-spacing) * 1.5);
   --menu-icon-fill: var(--link-color);
 
   --icon-fill: var(--menu-icon-fill);
 
-  composes: listReset from "@/styles/utilities.module.css";
+  composes: listReset from '@/styles/utilities.module.css';
   display: inline-flex;
   gap: var(--menu-gap);
 }
