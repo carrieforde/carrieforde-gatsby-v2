@@ -68,3 +68,9 @@
   );
   --banner-color: var(--banner-warning-color, var(--color-warning-dark));
 }
+
+@media (prefers-color-scheme: dark) {
+  .banner {
+    filter: invert(0.95) hue-rotate(180deg);
+  }
+}

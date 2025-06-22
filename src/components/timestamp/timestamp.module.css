@@ -15,3 +15,9 @@
   --body1-margin-bottom: calc(var(--base-spacing) * 4);
   --body1-margin-top: calc(var(--base-spacing) * 4);
 }
+
+@media (prefers-color-scheme: dark) {
+  .timestamp {
+    --timestamp-color: var(--color-default-300);
+  }
+}

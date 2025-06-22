@@ -71,8 +71,8 @@ a:focus-visible {
   outline-color: var(--link-outline-color);
 }
 
-a[target="_blank"]::after {
-  content: "↗";
+a[target='_blank']::after {
+  content: '↗';
   margin-left: 0.25em;
 }
 
@@ -188,14 +188,15 @@ pre,
 samp,
 tt,
 var {
-  background-color: var(--color-default-light);
+  background-color: var(--inline-code-bg-color);
   border-radius: var(--border-radius);
-  color: var(--color-default-dark);
-  font-family: var(--font-family-monospace);
+  color: var(--inline-code-color);
+  font-family: var(--pre-font-family);
+  font-size: var(--pre-font-size);
   hyphens: none;
-  line-height: normal;
-  padding-left: calc(var(--base-spacing) / 2);
-  padding-right: calc(var(--base-spacing) / 2);
+  line-height: var(--pre-line-height);
+  margin-block: calc(var(--base-spacing) * 6);
+  padding-inline: calc(var(--base-spacing) / 2);
   tab-size: 2;
   word-break: normal;
   word-spacing: normal;
@@ -203,8 +204,8 @@ var {
 }
 
 pre {
-  border: 1px solid var(--color-default-200);
-  border-radius: var(--border-radius);
+  border: 1px solid var(----pre-border-color);
+  border-radius: var(--pre-border-radius);
   font-size: 14px;
   margin-bottom: calc(var(--base-spacing) * 4);
   margin-top: calc(var(--base-spacing) * 4);
@@ -231,4 +232,15 @@ sup {
 img {
   max-width: 100%;
   height: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+  pre {
+    filter: invert(var(--base-invert)) hue-rotate(var(--base-hue-rotate));
+  }
+
+  /* Style code tags NOT inside pre */
+  :where(code):not(:where(pre code)) {
+    filter: invert(var(--base-invert)) hue-rotate(var(--base-hue-rotate));
+  }
 }

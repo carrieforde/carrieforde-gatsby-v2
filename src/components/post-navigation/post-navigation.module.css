@@ -26,8 +26,6 @@
 
 .link:hover {
   --link-color-hover: var(--link-color);
-
-  margin-inline-start: auto;
 }
 
 .next {

@@ -112,6 +112,8 @@
   --base-font-weight: 400;
   --base-spacing: 8px;
   --base-line-height: 1.75;
+  --base-invert: 0.95;
+  --base-hue-rotate: 180deg;
 
   --border-radius: 4px;
 
@@ -126,6 +128,18 @@
 
   --body-bg-color: #fff;
   --text-color: var(--dark-text-color);
+
+  --pre-bg-color: var(--color-default-50);
+  --pre-color: var(--dark-text-color);
+  --pre-border-color: var(--color-default-200);
+  --pre-border-radius: var(--border-radius);
+  --pre-font-family: var(--font-family-monospace);
+  --pre-font-size: calc(var(--base-font-size) * 0.875);
+  --pre-line-height: 1.75;
+  --pre-selection-bg-color: var(--color-primary-100);
+
+  --inline-code-color: var(--pre-color);
+  --inline-code-bg-color: var(--pre-bg-color);
 
   --z-index-tab-button-after: 9;
   --z-index-drawer: 10;
@@ -145,7 +159,6 @@
     --body-bg-color: var(--color-default-800);
     --text-color: var(--light-text-color);
 
-    /** Component settings */
     --link-color: var(--color-primary-200);
   }
 }
