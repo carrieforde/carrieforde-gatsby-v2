@@ -30,7 +30,7 @@
   --spinner-width: var(--spinner-large-width, 36px);
 }
 
-.default {
+.neutral {
   --spinner-color: var(--spinner-default-color, var(--color-default-main));
 }
 

@@ -124,7 +124,7 @@
   --font-family-monospace: var(--font-family-ibm-plex-mono, monospace);
 
   --dark-text-color: var(--color-default-main);
-  --light-text-color: #fff;
+  --light-text-color: var(--color-default-light);
 
   --body-bg-color: #fff;
   --text-color: var(--dark-text-color);
@@ -154,6 +154,8 @@
 
   --alcatraz-accordion-border-radius: 4px;
   --alcatraz-accordion-border: 1px solid var(--color-default-100);
+
+  --drawer-bg-color: var(--body-bg-color);
 }
 
 @media screen and (width >= 600px) {
@@ -167,6 +169,7 @@
     --body-bg-color: var(--color-default-800);
     --text-color: var(--light-text-color);
 
+    --heading-color: #fff;
     --link-color: var(--color-primary-200);
     --alcatraz-accordion-border: 1px solid var(--color-default-700);
   }

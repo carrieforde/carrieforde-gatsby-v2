@@ -4,9 +4,12 @@
 
   --icon-fill: var(--menu-icon-fill);
 
-  composes: listReset from '@/styles/utilities.module.css';
   display: inline-flex;
   gap: var(--menu-gap);
+}
+
+.item {
+  margin-top: 0;
 }
 
 .icon {

@@ -1,6 +1,6 @@
-import { Position } from "@/types/position";
+import { Position } from '@/types/position';
 
-type DrawerVariant = "default" | "nudge";
+type DrawerVariant = 'standard' | 'nudge';
 
 export type DrawerProps = React.PropsWithChildren<{
   /**

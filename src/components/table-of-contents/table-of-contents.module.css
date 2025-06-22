@@ -1,0 +1,8 @@
+.tableOfContents {
+  margin-left: 0;
+  padding-left: calc(var(--base-spacing) * 3);
+}
+
+.link {
+  text-decoration: none;
+}

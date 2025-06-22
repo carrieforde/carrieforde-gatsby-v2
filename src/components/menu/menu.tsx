@@ -18,7 +18,7 @@ export const Menu: React.FC<MenuProps> & MenuComposition = ({
   const menuClasses = clsx(s.menu, { [s.icon]: variant === 'icon' }, className);
 
   return (
-    <List as="ul" className={menuClasses}>
+    <List as="ul" className={menuClasses} variant="reset">
       {children}
     </List>
   );
@@ -26,7 +26,7 @@ export const Menu: React.FC<MenuProps> & MenuComposition = ({
 
 const MenuItem: React.FC<MenuItemProps> = ({ children, href, isActive }) => {
   return (
-    <List.Item as="li">
+    <List.Item as="li" className={s.item}>
       <Link href={href} isActive={isActive} variant="navigation">
         {children}
       </Link>

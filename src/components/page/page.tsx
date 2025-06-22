@@ -13,7 +13,7 @@ import { Text } from '@/components/text/text';
 import { Timestamp } from '@/components/timestamp/timestamp';
 
 const PageComponent: React.FC<PageProps> = ({ children }) => {
-  return <Box>{children}</Box>;
+  return <>{children}</>;
 };
 
 const Title: React.FC<PageTitleProps> = ({ children }) => {

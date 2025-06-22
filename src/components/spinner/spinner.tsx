@@ -7,7 +7,7 @@ import { useTheme } from '@/components/theme/use-theme';
 
 export const Spinner: React.FC<SpinnerProps> = ({
   size,
-  color = 'default',
+  color = 'neutral',
   className,
 }) => {
   const spinnerClasses = clsx(

@@ -1,0 +1,13 @@
+.tocButton {
+  position: fixed;
+  bottom: calc(var(--base-spacing) * 5);
+  right: calc(var(--base-spacing) * 5);
+  clip-path: circle();
+  background-color: var(--button-main);
+  padding: var(--base-spacing);
+  --icon-fill: var(--color-primary-main);
+}
+
+.tocButton:hover {
+  --icon-fill: var(--color-primary-contrast);
+}

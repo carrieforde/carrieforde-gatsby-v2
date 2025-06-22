@@ -1,13 +1,21 @@
+import { Button } from '@/components/button/button';
+import { Drawer } from '@/components/drawer/drawer';
+import { Head as Seo } from '@/components/head/head';
+import { Link } from '@/components/link/link';
+import { Page } from '@/components/page/page';
+import { PostNavigation } from '@/components/post-navigation/post-navigation';
 import { Site } from '@/components/site/site';
+import { TableOfContents } from '@/components/table-of-contents/table-of-contents';
+import { TableOfContentsItem } from '@/components/table-of-contents/types';
+import { Text } from '@/components/text/text';
+import { usePortalState } from '@/hooks/use-portal-state';
+import { PostTemplateProps } from '@/templates/post/types';
+import { getCategoryLink } from '@/utils/utils';
 import { graphql } from 'gatsby';
 import * as React from 'react';
-import { Head as Seo } from '@/components/head/head';
-import { PostTemplateProps } from '@/templates/post/types';
-import { Page } from '@/components/page/page';
-import { Link } from '@/components/link/link';
-import { getCategoryLink, parseQueryString } from '@/utils/utils';
-import { MergeFieldProvider } from '@/components/merge-field/merge-field-provider';
-import { PostNavigation } from '@/components/post-navigation/post-navigation';
+import * as s from '@/templates/post/post.module.css';
+import { VisuallyHidden } from '@/components/visually-hidden/visually-hidden';
+import { IconList } from '@/components/icons/icon-list';
 
 const PostTemplate: React.FC<PostTemplateProps> = ({
   children,
@@ -15,11 +23,14 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
   location,
   pageContext,
 }) => {
+  const { close, isOpen, open } = usePortalState();
+  const buttonRef = React.useRef<HTMLButtonElement>(null);
+
   if (!data.postData?.frontmatter) {
     return null;
   }
 
-  const { category, title, description, date, updated } =
+  const { category, title, description, date, updated, showToc } =
     data.postData.frontmatter;
   const categorySlug = getCategoryLink(category);
 
@@ -33,6 +44,31 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
         <Page.Description description={description} />
         <Page.Meta date={date} updatedDate={updated} />
         {children}
+
+        {showToc && data.postData.tableOfContents && (
+          <>
+            <Button
+              ref={buttonRef}
+              variant="icon"
+              color="primary"
+              onClick={open}
+              className={s.tocButton}
+            >
+              <IconList />
+              <VisuallyHidden>Table of Contents</VisuallyHidden>
+            </Button>
+            <Drawer buttonRef={buttonRef} isOpen={isOpen} onClose={close}>
+              <Text as="h2">Table of Contents</Text>
+              <TableOfContents
+                items={
+                  data.postData.tableOfContents.items as TableOfContentsItem[]
+                }
+                onClick={close}
+              />
+            </Drawer>
+          </>
+        )}
+
         <PostNavigation>
           {pageContext.previous?.fields.slug && (
             <PostNavigation.Link
@@ -77,6 +113,7 @@ export const query = graphql`
         description
         updated
       }
+      tableOfContents
     }
     siteData: site {
       siteMetadata {

@@ -8,6 +8,8 @@ import { Button } from '@/components/button/button';
 import * as s from '@/components/drawer/drawer.module.css';
 import { DrawerProps } from '@/components/drawer/types';
 import { IconXMark } from '@/components/icons/icon-xmark';
+import { Box } from '@/components/box/box';
+import { VisuallyHidden } from '@/components/visually-hidden/visually-hidden';
 
 /**
  * @todo Make widths configurable in the theme.
@@ -18,11 +20,11 @@ export const Drawer: React.FC<DrawerProps> = ({
   children,
   isOpen,
   onClose,
-  variant = 'default',
+  variant = 'standard',
 }) => {
   const contentRef = React.useRef<HTMLDivElement>(null);
 
-  const classes = clsx(s.drawer, s.left, {
+  const drawerClasses = clsx(s.drawer, s.left, {
     [s.open]: isOpen,
   });
 
@@ -89,20 +91,21 @@ export const Drawer: React.FC<DrawerProps> = ({
   }, [isOpen, buttonRef]);
 
   return createPortal(
-    <div className={classes}>
+    <Box className={drawerClasses}>
       <Button
         className={s.button}
         type="button"
         variant="icon"
         onClick={onClose}
       >
+        <VisuallyHidden>Close</VisuallyHidden>
         <IconXMark />
       </Button>
 
-      <div ref={contentRef} tabIndex={isOpen ? -1 : undefined}>
+      <Box ref={contentRef} tabIndex={isOpen ? -1 : undefined}>
         {children}
-      </div>
-    </div>,
+      </Box>
+    </Box>,
     document.body,
   );
 };

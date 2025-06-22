@@ -92,6 +92,36 @@ ul {
   font-size: 14px;
 }
 
+ol ol,
+ul ul,
+ol ul,
+ul ol {
+  margin-top: var(--base-spacing);
+}
+
+ol ol {
+  list-style: lower-alpha;
+}
+
+p + ul,
+p + ol {
+  margin-top: calc(var(--base-spacing) * 4);
+}
+
+li {
+  margin-bottom: 0;
+}
+
+li + li,
+li > ul,
+li > ol {
+  margin-top: var(--base-spacing);
+}
+
+ol ol ol {
+  list-style: lower-roman;
+}
+
 @media screen and (width >= 600px) {
   dl,
   ol,

@@ -15,9 +15,13 @@
 }
 
 .link {
-  --link-navigation-font-size: var(--post-navigation-font-size);
-  --link-navigation-line-height: var(--post-navigation-link-line-height);
-  --link-navigation-text-transform: var(--post-navigation-text-transform);
+  --link-navigation-font-size: var(--post-navigation-font-size) !important;
+  --link-navigation-line-height: var(
+    --post-navigation-link-line-height
+  ) !important;
+  --link-navigation-text-transform: var(
+    --post-navigation-text-transform
+  ) !important;
 
   align-items: baseline;
   display: flex;

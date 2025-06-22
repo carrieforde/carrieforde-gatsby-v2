@@ -1,11 +1,11 @@
 .drawer {
   /* --body-width: 100%; */
-  --drawer-bg-color: var(--color-default-contrast);
+  --drawer-bg-color: var(--body-bg-color);
   --drawer-width: 400px;
   --drawer-z-index: var(--z-index-drawer);
 
   background-color: var(--drawer-bg-color);
-  box-shadow: 0 0 4px 0 rgb(0 0 0 / 15%);
+  filter: drop-shadow(6px 0 4px var(--color-default-light));
   max-width: 100%;
   padding-block: calc(var(--base-spacing) * 6);
   padding-inline: calc(var(--base-spacing) * 4);
