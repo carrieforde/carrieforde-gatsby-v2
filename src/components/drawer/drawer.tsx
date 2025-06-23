@@ -90,6 +90,10 @@ export const Drawer: React.FC<DrawerProps> = ({
     };
   }, [isOpen, buttonRef]);
 
+  if (typeof document === 'undefined') {
+    return null;
+  }
+
   return createPortal(
     <Box className={drawerClasses}>
       <Button
