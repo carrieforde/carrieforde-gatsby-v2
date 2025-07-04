@@ -1,0 +1,63 @@
+---
+title: Why I'm sticking with Gatsby
+date: 2025-07-04
+category: Development
+---
+
+I ran into an issue in 2022 where my Gatsby site stopped working locally. And I mean stopped working in the sense that despite creating a fresh clone, I could never get `npm install` to succeed. I could never find a simple fix to get things working, so gave up trying to update my site. Every so often, I'd get the urge to write a blog post update my homepage, but quickly remember why it'd been so long since I last touched things.
+
+Occassionally, I'd embark on a journey that'd get me _really_ close to a new functional site. But just I'd quickly lose the will to finish things when I was 80 percent there--getting that last 20 percent felt impossible. I'd end up in this cycle, in large part, because I kept trying things that were too complex and overdone.
+
+For example, I tried using Next.js in combination with TinaCMS. We use Next.js as our React framework at Valon, so I'm really familar with it. I successfully got things rendering mostly the way I wanted, but there were a lot of tradeoffs I had to make that I didn't love. For example:
+
+1. restructuring all my content, especially everything in the `posts` directory
+1. moving all the images to the `public` directory, instead of keeping them co-located with the content
+1. completely breaking my existing URL structure (or fighting with rewrites)
+
+Sure, I was able to get a nice writing experience, and I could still write my posts in MDX as a fallback, but the developer experience just wasn't for me.
+
+A separate attempt I'd made involved starting fresh with Gatsby. I got really far with this one, but kept coming back to the idea that Next.js was probably a better choice--it's more popular, I use it at work, etc. I was essentially giving up on Gatsby because it wasn't the popular kid anymore.
+
+A couple weeks back, I challenged myself to see how far I could get building a fresh, `v2` of my Gatsby site using the infrastructure I'd built in various attempts to get my site functioning again.
+
+One of the reasons I kept coming back to Gatsby is how easy it is to quickly spin up a site that uses markdown for content. I moved all my content to markdown / MDX when I first migrated to Gatsby several years ago, and as far as editing experiences go, it's great. It's not fussy, but it's still flexible enough that I can use custom React components. Getting this iteration of my site going was as simple as answering "yes" to add markdown / MDX support during the `npm init gatsby` script.
+
+While GraphQL is generally overkill for the type of site I have, I really like working with it. The `gatsby-source-filesystem` plugin, along with a simple configuration in `gatsby-config.ts`, makes all my markdown content readily available in GraphQL. I can use `gatsby-node.ts` to customize the GraphQL resolvers as I see fit. One small example is how I update all `Mdx` content to add `slug` and `timeToRead` fields:
+
+```ts
+// Allows us to inject custom fields into our data.
+export const onCreateNode: GatsbyNode['onCreateNode'] = ({
+  node,
+  getNode,
+  actions: { createNodeField },
+}) => {
+  if (node.internal.type === 'Mdx') {
+    const slug = createFilePath({
+      node,
+      getNode,
+      basePath: `${__dirname}/content/posts`,
+      trailingSlash: false,
+    });
+
+    // Adds { field: { slug } } to the query result.
+    createNodeField({
+      node,
+      name: 'slug',
+      value: getPostSlug(slug),
+    });
+
+    // Add { field: { timeToRead } } to query result.
+    createNodeField({
+      node,
+      name: 'timeToRead',
+      value: readingTime((node as any).body),
+    });
+  }
+};
+```
+
+Candidly, I didn't really understand the power of working with `gatsby-node` for the first iteration of my Gatsby site. Only after working with GraphQL in the past three years has it truly made sense, but I love it nonetheless.
+
+I was able to spin up a `v2` of this site in about 11 hours. In comparision, I spent 20+ hours on trying to get my site working on Next.js, and didn't get anywhere close to deployment.
+
+All this to say, maybe personal sites aren't that deep? And instead, maybe that time is better spent actually writing. Sure, you can learn a lot by building out a site with new tech and all that, but it's just as easy for that technology to get in the way of actually releasing the app, publishing the post, etc.
