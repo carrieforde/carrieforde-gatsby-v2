@@ -6,9 +6,9 @@ category: Development
 
 I ran into an issue in 2022 where my Gatsby site stopped working locally. And I mean stopped working in the sense that despite creating a fresh clone, I could never get `npm install` to succeed. I could never find a simple fix to get things working, so gave up trying to update my site. Every so often, I'd get the urge to write a blog post update my homepage, but quickly remember why it'd been so long since I last touched things.
 
-Occassionally, I'd embark on a journey that'd get me _really_ close to a new functional site. But just I'd quickly lose the will to finish things when I was 80 percent there--getting that last 20 percent felt impossible. I'd end up in this cycle, in large part, because I kept trying things that were too complex and overdone.
+Occasionally, I'd embark on a journey that'd get me _really_ close to a new functional site. But just I'd quickly lose the will to finish things when I was 80 percent there--getting that last 20 percent felt impossible. I'd end up in this cycle, in large part, because I kept trying things that were too complex and overdone.
 
-For example, I tried using Next.js in combination with TinaCMS. We use Next.js as our React framework at Valon, so I'm really familar with it. I successfully got things rendering mostly the way I wanted, but there were a lot of tradeoffs I had to make that I didn't love. For example:
+For example, I tried using Next.js in combination with TinaCMS. We use Next.js as our React framework at Valon, so I'm really familiar with it. I successfully got things rendering mostly the way I wanted, but there were a lot of tradeoffs I had to make that I didn't love. For example:
 
 1. restructuring all my content, especially everything in the `posts` directory
 1. moving all the images to the `public` directory, instead of keeping them co-located with the content
@@ -58,6 +58,6 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = ({
 
 Candidly, I didn't really understand the power of working with `gatsby-node` for the first iteration of my Gatsby site. Only after working with GraphQL in the past three years has it truly made sense, but I love it nonetheless.
 
-I was able to spin up a `v2` of this site in about 11 hours. In comparision, I spent 20+ hours on trying to get my site working on Next.js, and didn't get anywhere close to deployment.
+I was able to spin up a `v2` of this site in about 11 hours. In comparison, I spent 20+ hours on trying to get my site working on Next.js, and didn't get anywhere close to deployment.
 
 All this to say, maybe personal sites aren't that deep? And instead, maybe that time is better spent actually writing. Sure, you can learn a lot by building out a site with new tech and all that, but it's just as easy for that technology to get in the way of actually releasing the app, publishing the post, etc.
