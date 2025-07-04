@@ -5,9 +5,15 @@
   clip-path: circle();
   background-color: var(--button-main);
   padding: var(--base-spacing);
-  --icon-fill: var(--color-primary-main);
+  --icon-fill: var(--color-primary-contrast);
 }
 
 .tocButton:hover {
   --icon-fill: var(--color-primary-contrast);
+}
+
+@media (prefers-color-scheme: dark) {
+  .tocButton {
+    --icon-fill: var(--color-primary-main);
+  }
 }

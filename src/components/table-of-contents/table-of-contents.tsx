@@ -20,7 +20,7 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({
             {item.title}
           </Link>
           {item.items && item.items.length > 0 ? (
-            <TableOfContents items={item.items} />
+            <TableOfContents items={item.items} onClick={onClick} />
           ) : null}
         </List.Item>
       ))}

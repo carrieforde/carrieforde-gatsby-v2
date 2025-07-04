@@ -43,8 +43,6 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
         <Page.Title>{title}</Page.Title>
         <Page.Description description={description} />
         <Page.Meta date={date} updatedDate={updated} />
-        {children}
-
         {showToc && data.postData.tableOfContents && (
           <>
             <Button
@@ -68,6 +66,8 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
             </Drawer>
           </>
         )}
+
+        {children}
 
         <PostNavigation>
           {pageContext.previous?.fields.slug && (
