@@ -79,6 +79,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
       }
       posts: allMdx(
         filter: { internal: { contentFilePath: { regex: "/posts/" } } }
+        sort: { frontmatter: { date: DESC } }
       ) {
         edges {
           next {
