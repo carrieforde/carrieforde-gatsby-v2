@@ -7,12 +7,15 @@ import * as s from '@/components/image/image.module.css';
 
 export const Image: React.FC<ImageProps> = forwardRef(
   ({ alt, caption, float = 'none', src, height, variant, width }) => {
+    const figureClasses = clsx('figure', {
+      [s.figure]: variant !== 'circle',
+    })
     const imgClasses = clsx('image', [s[float]], {
       [s.circle]: variant === 'circle',
     });
 
     return (
-      <Box as="figure">
+      <Box as="figure" className={figureClasses}>
         <img
           alt={alt}
           src={src}
@@ -20,7 +23,7 @@ export const Image: React.FC<ImageProps> = forwardRef(
           width={width}
           className={imgClasses}
         />
-        {caption && <Box as="figcaption">{caption}</Box>}
+        {caption && <Box as="figcaption" className={s.caption}>{caption}</Box>}
       </Box>
     );
   },

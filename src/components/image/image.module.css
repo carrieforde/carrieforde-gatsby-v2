@@ -1,3 +1,8 @@
+.figure {
+  margin-block: calc(var(--base-spacing) * 4);
+  margin-inline: 0;
+}
+
 .right {
   float: right;
 }
@@ -5,4 +10,10 @@
 .circle {
   clip-path: circle();
   shape-outside: circle();
+}
+
+.caption {
+  composes: finePrint from '@/components/text/text.module.css';
+
+  text-align: center;
 }
