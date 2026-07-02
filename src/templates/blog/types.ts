@@ -13,4 +13,3 @@ export type BlogTemplateProps = PageProps<
 >;
 
 export type BlogTemplateHeadProps = HeadProps<Queries.BlogQuery>;
-``;
