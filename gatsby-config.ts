@@ -14,6 +14,10 @@ const config: GatsbyConfig = {
         to: '/blog',
         text: 'Blog',
       },
+      {
+        to: '/cats',
+        text: 'Cats',
+      },
     ],
     footerLinks: [
       {
@@ -73,6 +77,14 @@ const config: GatsbyConfig = {
     },
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'cats',
+        path: `${__dirname}/content/cats`,
+      },
+      __key: 'cats',
+    },
     {
       resolve: 'gatsby-source-filesystem',
       options: {

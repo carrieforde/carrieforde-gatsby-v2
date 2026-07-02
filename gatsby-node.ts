@@ -7,7 +7,7 @@ import readingTime from 'reading-time';
 function slugify(str: string) {
   return str.replace(/\s/g, '').toLowerCase();
 }
-function getPostSlug(slug: string) {
+function getSlug(slug: string) {
   return `/${slug.split('/').at(-1)}/`;
 }
 
@@ -20,10 +20,17 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = ({
   actions: { createNodeField },
 }) => {
   if (node.internal.type === 'Mdx') {
-    const slug = createFilePath({
+    const postSlug = createFilePath({
       node,
       getNode,
       basePath: `${__dirname}/content/posts`,
+      trailingSlash: false,
+    });
+
+    const catSlug = createFilePath({
+      node,
+      getNode,
+      basePath: `${__dirname}/content/cats`,
       trailingSlash: false,
     });
 
@@ -31,7 +38,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = ({
     createNodeField({
       node,
       name: 'slug',
-      value: getPostSlug(slug),
+      value: getSlug(catSlug) ?? getSlug(postSlug),
     });
 
     // Add { field: { timeToRead } } to query result.
@@ -63,6 +70,37 @@ export const createPages: GatsbyNode['createPages'] = async ({
             }
           }
           totalCount
+        }
+      }
+      cats: allMdx(
+        filter: {internal: {contentFilePath: {regex: "/cats/"}}}
+        sort: {frontmatter: {adoptionDate: ASC}}
+      ) {
+        edges {
+          next {
+            fields {
+              slug
+            }
+            frontmatter {
+              name
+            }
+          }
+          previous {
+            fields {
+              slug
+            }
+            frontmatter {
+              name
+            }
+          }
+          node {
+            fields {
+              slug
+            }
+            internal {
+              contentFilePath
+            }
+          }
         }
       }
       pages: allMdx(
@@ -115,7 +153,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
   if (result.errors) {
     throw result.errors;
   }
-  const { categories, pages, posts } = result.data as Queries.ContentQuery;
+  const { categories, cats, pages, posts } = result.data as Queries.ContentQuery;
   const numberOfPagesBlog = Math.ceil(posts.totalCount / POSTS_PER_PAGE);
 
   // Paginated blog pages.
@@ -130,6 +168,13 @@ export const createPages: GatsbyNode['createPages'] = async ({
         currentPage: idx + 1,
       },
     });
+  });
+
+  // Create cats page.
+  createPage({
+    path: 'cats',
+    component: `${path.resolve('./src/templates/cats/cats.tsx')}`,
+    context: {},
   });
 
   // Paginated category pages.
@@ -155,6 +200,23 @@ export const createPages: GatsbyNode['createPages'] = async ({
       });
     });
   });
+
+  // cats.edges.forEach((edge) => {
+  //   if (!edge.node.fields?.slug) {
+  //     return;
+  //   }
+  //   createPage({
+  //     path: edge.node.fields.slug,
+  //     component: `${path.resolve(
+  //       './src/templates/cats/cats.tsx',
+  //     )}?__contentFilePath=${edge.node.internal.contentFilePath}`,
+  //     context: {
+  //       next: edge.next,
+  //       previous: edge.previous,
+  //       slug: edge.node.fields.slug,
+  //     },
+  //   });
+  // });
 
   pages.nodes.forEach((node) => {
     if (!node.fields?.slug) {
