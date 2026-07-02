@@ -266,13 +266,12 @@ export const createPages: GatsbyNode['createPages'] = async ({
     });
 
     const redirectFrom = pathSlug.replace('/blog', '');
-    console.log(`Redirecting from ${redirectFrom} to ${pathSlug}`);
     createRedirect({
       fromPath: redirectFrom,
       toPath: pathSlug,
       isPermanent: true,
-      redirectInBrowser: true,
-      force: true,
+      // redirectInBrowser: true,
+      // force: true,
     });
   });
 };

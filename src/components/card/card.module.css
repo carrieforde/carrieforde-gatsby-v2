@@ -1,3 +1,20 @@
+.cardWithImage {
+  border-radius: var(--border-radius);
+  box-shadow: 2px 2px 4px 1px var(--color-default-100);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  gap: calc(var(--base-spacing) * 2);
+}
+
+.image {
+  display: block;
+  object-fit: cover;
+  height: 250px;
+  width: 250px;
+  min-width: 100%;
+}
+
 .title {
   --card-title-color: var(--color-default-dark);
   --card-title-font-size: 24px;
@@ -15,8 +32,15 @@
   display: inline-flex;
   gap: calc(var(--base-spacing) / 2);
 }
+
 @media (prefers-color-scheme: dark) {
   .title {
     --card-title-color: var(--color-default-light);
+  }
+}
+
+@media screen and (width >= 800px) {
+  .cardWithImage {
+    flex-direction: row;
   }
 }

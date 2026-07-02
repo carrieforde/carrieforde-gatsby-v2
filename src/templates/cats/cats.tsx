@@ -17,7 +17,9 @@ const CatsTemplate: React.FC<CatsTemplateProps> = ({ data }) => {
       <Page>
         <Page.Title>Cats</Page.Title>
         <Page.Description
-          description={['Learn about the furry members of the Forde family.']}
+          description={[
+            'We currently have four resident cats. Learn more about each of the furry members (past and present) of the Forde family.',
+          ]}
         />
 
         <List as="ul" variant="reset">

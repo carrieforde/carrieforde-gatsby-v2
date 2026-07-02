@@ -14,13 +14,30 @@ import { Link } from '@/components/link/link';
 import { Text } from '@/components/text/text';
 import { Timestamp } from '@/components/timestamp/timestamp';
 import { forwardRef } from '@/components/utilities/react';
+import { Image } from '@/components/image/image';
 
 const CardComponent = forwardRef(function Card(
-  { as = TagName, children, ...props },
+  { as = TagName, children, image, ...props },
   ref,
 ) {
+  const classes = clsx('card', s.card, {
+    [s.cardWithImage]: Boolean(image),
+  });
+
+  if (image) {
+    return (
+      <Box {...props} as={as} ref={ref} className={classes}>
+        <Box>
+          <img src={image} alt="" className={s.image} />
+        </Box>
+
+        {children}
+      </Box>
+    );
+  }
+
   return (
-    <Box {...props} as={as} ref={ref}>
+    <Box {...props} as={as} ref={ref} className={classes}>
       {children}
     </Box>
   );

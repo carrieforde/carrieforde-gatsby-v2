@@ -57,6 +57,7 @@ export const Site: React.FC<SiteProps> & SiteComposition = ({
             <Site.Navigation>
               <Menu.Item href="/">Home</Menu.Item>
               <Menu.Item href="/blog">Blog</Menu.Item>
+              <Menu.Item href="/cats">Cats</Menu.Item>
             </Site.Navigation>
           </Site.Header>
           <Site.Main>{children}</Site.Main>

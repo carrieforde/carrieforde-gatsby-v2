@@ -6,6 +6,7 @@ type TagName = typeof TagName;
 
 type CardOptions<T extends React.ElementType = TagName> = {
   as?: T;
+  image?: string | null;
 };
 
 export type CardProps<T extends React.ElementType = TagName> = Props<
