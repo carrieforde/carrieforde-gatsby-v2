@@ -7,8 +7,9 @@ import readingTime from 'reading-time';
 function slugify(str: string) {
   return str.replace(/\s/g, '').toLowerCase();
 }
-function getSlug(slug: string) {
-  return `/${slug.split('/').at(-1)}/`;
+
+function getSlug(str: string, base: string) {
+  return `/${base}/${str.split('/').at(-1)}/`;
 }
 
 const POSTS_PER_PAGE = 5;
@@ -20,26 +21,37 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = ({
   actions: { createNodeField },
 }) => {
   if (node.internal.type === 'Mdx') {
-    const postSlug = createFilePath({
-      node,
-      getNode,
-      basePath: `${__dirname}/content/posts`,
-      trailingSlash: false,
-    });
+    if (node.internal.contentFilePath?.includes('content/cats')) {
+      const catSlug = createFilePath({
+        node,
+        getNode,
+        basePath: `${__dirname}/content/cats`,
+        trailingSlash: false,
+      });
 
-    const catSlug = createFilePath({
-      node,
-      getNode,
-      basePath: `${__dirname}/content/cats`,
-      trailingSlash: false,
-    });
+      // Adds { field: { slug } } to the query result.
+      createNodeField({
+        node,
+        name: 'slug',
+        value: getSlug(catSlug, 'cats'),
+      });
+    }
 
-    // Adds { field: { slug } } to the query result.
-    createNodeField({
-      node,
-      name: 'slug',
-      value: getSlug(catSlug) ?? getSlug(postSlug),
-    });
+    if (node.internal.contentFilePath?.includes('content/posts')) {
+      const postSlug = createFilePath({
+        node,
+        getNode,
+        basePath: `${__dirname}/content/posts`,
+        trailingSlash: false,
+      });
+
+      // Adds { field: { slug } } to the query result.
+      createNodeField({
+        node,
+        name: 'slug',
+        value: getSlug(postSlug, 'blog'),
+      });
+    }
 
     // Add { field: { timeToRead } } to query result.
     createNodeField({
@@ -57,7 +69,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = ({
 // We can also use this to create our `blog` our `posts` page.
 export const createPages: GatsbyNode['createPages'] = async ({
   graphql,
-  actions: { createPage },
+  actions: { createPage, createRedirect },
 }) => {
   const result = await graphql(`
     query Content {
@@ -73,8 +85,8 @@ export const createPages: GatsbyNode['createPages'] = async ({
         }
       }
       cats: allMdx(
-        filter: {internal: {contentFilePath: {regex: "/cats/"}}}
-        sort: {frontmatter: {adoptionDate: ASC}}
+        filter: { internal: { contentFilePath: { regex: "/cats/" } } }
+        sort: { frontmatter: { adoptionDate: ASC } }
       ) {
         edges {
           next {
@@ -153,7 +165,8 @@ export const createPages: GatsbyNode['createPages'] = async ({
   if (result.errors) {
     throw result.errors;
   }
-  const { categories, cats, pages, posts } = result.data as Queries.ContentQuery;
+  const { categories, cats, pages, posts } =
+    result.data as Queries.ContentQuery;
   const numberOfPagesBlog = Math.ceil(posts.totalCount / POSTS_PER_PAGE);
 
   // Paginated blog pages.
@@ -237,16 +250,29 @@ export const createPages: GatsbyNode['createPages'] = async ({
     if (!edge.node.fields?.slug) {
       return;
     }
+
+    const pathSlug = edge.node.fields.slug;
+
     createPage({
-      path: edge.node.fields.slug,
+      path: pathSlug,
       component: `${path.resolve(
         './src/templates/post/post.tsx',
       )}?__contentFilePath=${edge.node.internal.contentFilePath}`,
       context: {
         next: edge.next,
         previous: edge.previous,
-        slug: edge.node.fields.slug,
+        slug: pathSlug,
       },
+    });
+
+    const redirectFrom = pathSlug.replace('/blog', '');
+    console.log(`Redirecting from ${redirectFrom} to ${pathSlug}`);
+    createRedirect({
+      fromPath: redirectFrom,
+      toPath: pathSlug,
+      isPermanent: true,
+      redirectInBrowser: true,
+      force: true,
     });
   });
 };
