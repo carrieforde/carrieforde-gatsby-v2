@@ -20,6 +20,7 @@ function getItemConfig(items: TableOfContentsProps["items"], currentLevel = 0): 
 export const TableOfContents: React.FC<TableOfContentsProps> = ({
   items,
 }) => {
+  const [isHovered, setIsHovered] = React.useState(false);
   
   if (!items || items.length === 0) {
     return null;
@@ -27,17 +28,18 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({
 
   const mappedItems = getItemConfig(items);
 
+  const handleMouseEnter = React.useCallback(() => setIsHovered(true), []);
+  const handleMouseLeave = React.useCallback(() => setIsHovered(false), []);
+
   return (
-    <Box className={s.placeholderContainer}>
+    <Box className={s.placeholderContainer} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <PlaceholderList items={mappedItems} />
+
+     {isHovered && <Popover className={s.tableOfContents}>
+        <TableOfContentsList items={items}  />
+      </Popover>}
     </Box>
   )
-
-  // return (
-  //   <Popover className={s.tableOfContents}>
-  //     <TableOfContentsList items={items}  />
-  //   </Popover>
-  // );
 };
 
 type PlaceholderListProps = {

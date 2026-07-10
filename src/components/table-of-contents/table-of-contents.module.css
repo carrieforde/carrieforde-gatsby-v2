@@ -3,6 +3,7 @@
   right: calc(var(--base-spacing) * 2);
   top: 50%;
   transform: translateY(-50%);
+  white-space: nowrap;
 }
 
 .tableOfContents {
@@ -15,8 +16,15 @@
 }
 
 .tableOfContentsList {
+  composes: body2 from "@/components/text/text.module.css";
+  list-style-type: none;
   margin-left: 0;
-  padding-left: calc(var(--base-spacing) * 3);
+  margin-top: var(--base-spacing);
+  padding-left: 0;
+}
+
+.tableOfContentsList .tableOfContentsList {
+  padding-left: var(--base-spacing);
 }
 
 .link {
