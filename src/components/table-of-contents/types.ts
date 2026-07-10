@@ -6,5 +6,4 @@ export type TableOfContentsItem = {
 
 export type TableOfContentsProps = {
   items: TableOfContentsItem[];
-  onClick: () => void;
 };

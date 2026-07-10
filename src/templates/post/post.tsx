@@ -16,6 +16,7 @@ import * as React from 'react';
 import * as s from '@/templates/post/post.module.css';
 import { VisuallyHidden } from '@/components/visually-hidden/visually-hidden';
 import { IconList } from '@/components/icons/icon-list';
+import { Popover } from '@/components/popover/popover';
 
 const PostTemplate: React.FC<PostTemplateProps> = ({
   children,
@@ -43,28 +44,12 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
         <Page.Title>{title}</Page.Title>
         <Page.Description description={description} />
         <Page.Meta date={date} updatedDate={updated} />
-        {showToc && data.postData.tableOfContents && (
-          <>
-            <Button
-              ref={buttonRef}
-              variant="icon"
-              color="primary"
-              onClick={open}
-              className={s.tocButton}
-            >
-              <IconList />
-              <VisuallyHidden>Table of Contents</VisuallyHidden>
-            </Button>
-            <Drawer buttonRef={buttonRef} isOpen={isOpen} onClose={close}>
-              <Text as="h2">Table of Contents</Text>
-              <TableOfContents
-                items={
-                  data.postData.tableOfContents.items as TableOfContentsItem[]
-                }
-                onClick={close}
-              />
-            </Drawer>
-          </>
+        {data.postData.tableOfContents && (
+            <TableOfContents
+              items={
+                data.postData.tableOfContents.items as TableOfContentsItem[]
+              }
+            />
         )}
 
         {children}

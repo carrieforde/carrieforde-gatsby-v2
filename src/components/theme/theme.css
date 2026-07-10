@@ -156,6 +156,8 @@
   --alcatraz-accordion-border: 1px solid var(--color-default-100);
 
   --drawer-bg-color: var(--body-bg-color);
+
+  --popover-bg-color: var(--body-bg-color);
 }
 
 @media screen and (width >= 600px) {
