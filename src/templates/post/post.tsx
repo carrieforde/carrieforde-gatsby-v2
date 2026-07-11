@@ -1,5 +1,3 @@
-import { Button } from '@/components/button/button';
-import { Drawer } from '@/components/drawer/drawer';
 import { Head as Seo } from '@/components/head/head';
 import { Link } from '@/components/link/link';
 import { Page } from '@/components/page/page';
@@ -7,16 +5,11 @@ import { PostNavigation } from '@/components/post-navigation/post-navigation';
 import { Site } from '@/components/site/site';
 import { TableOfContents } from '@/components/table-of-contents/table-of-contents';
 import { TableOfContentsItem } from '@/components/table-of-contents/types';
-import { Text } from '@/components/text/text';
 import { usePortalState } from '@/hooks/use-portal-state';
 import { PostTemplateProps } from '@/templates/post/types';
 import { getCategoryLink } from '@/utils/utils';
 import { graphql } from 'gatsby';
 import * as React from 'react';
-import * as s from '@/templates/post/post.module.css';
-import { VisuallyHidden } from '@/components/visually-hidden/visually-hidden';
-import { IconList } from '@/components/icons/icon-list';
-import { Popover } from '@/components/popover/popover';
 
 const PostTemplate: React.FC<PostTemplateProps> = ({
   children,
@@ -24,9 +17,6 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
   location,
   pageContext,
 }) => {
-  const { close, isOpen, open } = usePortalState();
-  const buttonRef = React.useRef<HTMLButtonElement>(null);
-
   if (!data.postData?.frontmatter) {
     return null;
   }

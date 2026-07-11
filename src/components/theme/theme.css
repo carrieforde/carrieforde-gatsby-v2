@@ -117,6 +117,8 @@
 
   --border-radius: 4px;
 
+  --box-shadow: 0 0 4px 0 color-mix(in srgb, var(--text-color) 20%, transparent);
+
   --font-family-libre-franklin: 'Libre Franklin';
   --font-family-ibm-plex-mono: 'IBM Plex Mono';
 

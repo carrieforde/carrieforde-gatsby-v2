@@ -76,7 +76,7 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({
     <Box className={s.placeholderContainer} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <PlaceholderList items={mappedItems} />
 
-     {isHovered && <Popover className={s.tableOfContents}>
+     {isHovered && <Popover className={s.tableOfContents} isOpen={true}>
         <TableOfContentsList items={items}  />
       </Popover>}
     </Box>
