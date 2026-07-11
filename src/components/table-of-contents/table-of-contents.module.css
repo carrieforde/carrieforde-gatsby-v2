@@ -31,12 +31,21 @@
   text-decoration: none;
 }
 
+.linkActive {
+  color: var(--text-color);
+}
+
 .placeholder {
-  background-color: var(--color-default-400);
+  background-color: var(--color-default-200);
   border-radius: var(--border-radius);
   display: block;
   height: 2px;
+  transition: ease-in-out background-color 0.3s;
   width: 16px;
+}
+
+.active {
+  background-color: var(--color-default-400);
 }
 
 .placeholderContainer {
